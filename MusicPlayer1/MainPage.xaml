@@ -1,0 +1,77 @@
+﻿<Page
+    x:Class="MusicPlayer1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MusicPlayer1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+            <Button Name="BackButton"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Content=" &#xE0A6;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Height="45"
+                    Width="45"
+                    Click="BackButton_Click"
+                    />
+            <Button Name="HamburgerButton"
+                    RelativePanel.Below="BackButton"
+                    Content="&#xE700;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Height="45"
+                    Width="45"
+                    Click="HamburgerButton_Click"
+                    />
+
+        </RelativePanel>
+
+        <SplitView Grid.Row="1"
+                   Name="MySpiltView"
+                   DisplayMode="CompactOverlay"
+                   CompactPaneLength="45"
+                   OpenPaneLength="200">
+            <SplitView.Pane>
+                <ListView Name="MenuItemsListView"
+                          IsItemClickEnabled="True"
+                          ItemClick="MenuItemsListView_ItemClick">
+                    
+                    
+                </ListView>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+                <Grid Margin="20,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Name="AllSongs"
+                               Text="My Library"
+                               FontSize="25"
+                               Grid.Row="0"
+                               Margin="20,-40,0,0"
+                               />
+                    <ListView Name="ListOfSongs"
+                              IsItemClickEnabled="True"
+                              ItemClick="ListOfSongs_ItemClick"
+                              
+                            />
+
+                </Grid>
+            </SplitView.Content>
+            
+            
+        </SplitView>
+    
+    </Grid>
+</Page>
