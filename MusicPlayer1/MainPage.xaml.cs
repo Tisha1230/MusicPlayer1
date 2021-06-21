@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MusicPlayer1.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,13 +24,17 @@ namespace MusicPlayer1
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
+        private ObservableCollection<Music> music;
+        public string ImageFile { get; set; }
+        public string SongName { get; set; }
+
+        public MainPage() 
         {
             this.InitializeComponent();
+            music = new ObservableCollection<Music>();
+            MusicManager.GetMusics(music);
         }
 
-        String[] paths, files;
-        
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
@@ -45,11 +51,30 @@ namespace MusicPlayer1
             
         }
 
-        private void ListOfSongs_ItemClick(object sender, ItemClickEventArgs e)
+        private void MusicListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //code to select songs
-            
-           
-        } 
+            Music userClickedItem = (Music)e.ClickedItem;
+            string extension = Path.GetExtension(userClickedItem.FileName);
+            if (extension ==".mp3")
+            {
+                MyMediaElement.Source = new Uri(this.BaseUri, userClickedItem.FileName);
+                MyMediaElement.Play();
+            }
+        }
+
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyMediaElement.Pause();
+        }
+
+        private void AddToList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyMediaElement.Play();
+        }
     }
 }

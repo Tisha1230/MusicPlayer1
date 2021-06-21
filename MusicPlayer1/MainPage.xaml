@@ -2,11 +2,12 @@
     x:Class="MusicPlayer1.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MusicPlayer1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:data="using:MusicPlayer1.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -42,36 +43,108 @@
             <SplitView.Pane>
                 <ListView Name="MenuItemsListView"
                           IsItemClickEnabled="True"
-                          ItemClick="MenuItemsListView_ItemClick">
-                    
-                    
-                </ListView>
+                          ItemClick="MenuItemsListView_ItemClick"/>
+
             </SplitView.Pane>
 
+
             <SplitView.Content>
+                
                 <Grid Margin="20,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Name="AllSongs"
-                               Text="My Library"
+
+                    <TextBlock Name="CategoryTextBlock"
+                               Text="All Songs"
                                FontSize="25"
                                Grid.Row="0"
                                Margin="20,-40,0,0"
                                />
-                    <ListView Name="ListOfSongs"
-                              IsItemClickEnabled="True"
-                              ItemClick="ListOfSongs_ItemClick"
-                              
-                            />
+                    <Grid Margin="40,40,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+
+
+                        <ListView Name="MusicListView"
+                                          SelectionMode="None"
+                                          IsItemClickEnabled="True"
+                                          ItemClick="MusicListView_ItemClick"
+                                          ItemsSource="{x:Bind music}"
+                                         >
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="data:Music">
+
+                                    <StackPanel Orientation="Vertical">
+
+                                        <TextBlock Text="{x:Bind SongName}"/>
+
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <SplitView>
+
+                            <SplitView.Content>
+                                <Grid Margin="0,10,0,0"
+                                      HorizontalAlignment="Right" 
+                                      Width="500">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <RelativePanel>
+                                        <MediaElement Name="MyMediaElement" AutoPlay="True"/>
+
+                                        <Button Name="PlayButton"
+                                                Content="&#xE102;"
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Height="45"
+                                                Width="45"
+                                                Click="PlayButton_Click"/>
+
+                                        <Button Name="PauseButton"
+                                                RelativePanel.RightOf="PlayButton"
+                                                Content="&#xE103;"
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Height="45"
+                                                Width="45"
+                                                Click="PauseButton_Click"/>
+                                        
+                                        <Button Name="AddToList"
+                                                RelativePanel.RightOf="PauseButton"
+                                                Content="&#xE109;"
+                                                FontFamily="Segoe MDL2 Assets"
+                                                Height="45"
+                                                Width="45"
+                                                Click="AddToList_Click"/>
+
+
+                                    </RelativePanel>
+
+                                </Grid>
+                            </SplitView.Content>
+                        </SplitView>
+
+                    </Grid>
 
                 </Grid>
             </SplitView.Content>
-            
-            
+
+
         </SplitView>
-    
+
     </Grid>
 </Page>
