@@ -27,6 +27,7 @@ namespace MusicPlayer1
         private ObservableCollection<Music> music;
         public string ImageFile { get; set; }
         public string SongName { get; set; }
+        private Music CurrentMusic { get; set; }
 
         public MainPage() 
         {
@@ -54,11 +55,13 @@ namespace MusicPlayer1
         private void MusicListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Music userClickedItem = (Music)e.ClickedItem;
+            CurrentMusic = userClickedItem;
             string extension = Path.GetExtension(userClickedItem.FileName);
             if (extension ==".mp3")
             {
                 MyMediaElement.Source = new Uri(this.BaseUri, userClickedItem.FileName);
                 MyMediaElement.Play();
+                NowPlaying.Text = userClickedItem.SongName;
             }
         }
 
@@ -69,12 +72,27 @@ namespace MusicPlayer1
 
         private void AddToList_Click(object sender, RoutedEventArgs e)
         {
+           
+        }
 
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyMediaElement.Stop();
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             MyMediaElement.Play();
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentMusic != null)
+            {
+                string playListName = PlayListName.Text;
+                var playList = new PlayList(playListName);
+                playList.Add(CurrentMusic);
+            }
         }
     }
 }
