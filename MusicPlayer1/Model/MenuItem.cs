@@ -9,6 +9,6 @@ namespace MusicPlayer1.Model
     public class MenuItem
     {
         public string IconFile { get; set; }
-        public MenuList menuList { get; set; }
+        public MenuList menuListCategory { get; set; }
     }
 }

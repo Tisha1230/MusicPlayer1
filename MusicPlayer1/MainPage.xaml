@@ -9,11 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-
-
+        
         <Grid>
-
-
+            
             <Button Name="HamburgerButton"
                                         Content="&#xE700;"
                                         FontFamily="Segoe MDL2 Assets"
@@ -81,11 +79,30 @@
             <SplitView Name="MySpiltView"
                    DisplayMode="CompactOverlay"
                    CompactPaneLength="45"
-                   OpenPaneLength="200">
+                   OpenPaneLength="150">
                 <SplitView.Pane>
                     <ListView Name="MenuItemsListView"
                           IsItemClickEnabled="True"
-                          ItemClick="MenuItemsListView_ItemClick">
+                          ItemClick="MenuItemsListView_ItemClick"
+                              ItemsSource="{x:Bind MenuItemListView1}"
+                             >
+                        <ListView.ItemTemplate >
+                            <DataTemplate x:DataType="data:MenuItem">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Height="25"
+                                       Width="20"
+                                       Margin="0,10,0,10"
+                                       Source="{x:Bind IconFile}"/>
+                                    <TextBlock FontSize="18"
+                                         Margin="15,0,0,0"
+                                         VerticalAlignment="Center"
+                                         Text="{x:Bind menuListCategory}"/>
+                                  
+                                </StackPanel>
+
+                            </DataTemplate>
+                            
+                        </ListView.ItemTemplate>
 
 
                     </ListView>

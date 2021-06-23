@@ -29,12 +29,28 @@ namespace MusicPlayer1
         public string ImageFile { get; set; }
         public string SongName { get; set; }
         private Music CurrentMusic { get; set; }
+        private List<MenuItem> MenuItemListView1;
 
         public MainPage() 
         {
             this.InitializeComponent();
             music = new ObservableCollection<Music>();
             MusicManager.GetMusics(music);
+
+            MenuItemListView1 = new List<MenuItem>()
+            {
+                new MenuItem
+                {
+                    menuListCategory = MenuList.MyLibrary,
+                    IconFile= "Assets/Icons/AllSongsIcon.png"
+                },
+
+                new MenuItem
+                {
+                    menuListCategory = MenuList.Playlists,
+                    IconFile= "Assets/Icons/PlayListIcon.png"
+                },
+            };
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -45,7 +61,7 @@ namespace MusicPlayer1
         private void MenuItemsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var menuItem = (MenuItem)e.ClickedItem;
-            CategoryTextBlock.Text = menuItem.menuList.ToString();
+            CategoryTextBlock.Text = menuItem.menuListCategory.ToString();
             
             
         }

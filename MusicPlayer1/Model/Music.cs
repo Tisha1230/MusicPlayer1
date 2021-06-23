@@ -9,7 +9,7 @@ namespace MusicPlayer1.Model
     public enum MenuList
     {
         MyLibrary,
-        Playlist
+        Playlists
     }
    public class Music
     {
