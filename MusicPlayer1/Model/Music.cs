@@ -18,7 +18,7 @@ namespace MusicPlayer1.Model
         public string ArtistName;
         public string AlbumName;
         public string AudioFile { get; set; }
-        public string ImageFile { get; set; }
+        public Uri ImageFile { get; set; }
         
         public Music (string fileName,string imageFile, string songName)
         {
@@ -29,11 +29,12 @@ namespace MusicPlayer1.Model
 
             if (imageFile == null)
             {
-                ImageFile = $"/Assets/Icons/MusicIcon.png";
+                string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
+                ImageFile = new Uri($"{root}/Assets/Icons/MusicIcon.png", UriKind.Absolute);
             }
             else
             {
-                ImageFile = imageFile;
+                ImageFile = new Uri(imageFile, UriKind.Absolute);
             }
 
             

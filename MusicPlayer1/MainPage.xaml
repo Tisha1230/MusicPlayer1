@@ -7,51 +7,40 @@
     xmlns:data="using:MusicPlayer1.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-        <StackPanel>
-           
 
-                <Grid>
-
-                    <RelativePanel Grid.Row="0">
-
-                <Button Name="BackButton"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    Content=" &#xE0A6;"
-                    FontFamily="Segoe MDL2 Assets"
-                    Height="45"
-                    Width="45"
-                    Click="BackButton_Click"
-                    />
-                        <Button Name="HamburgerButton"
-                    RelativePanel.Below="BackButton"
-                    Content="&#xE700;"
-                    FontFamily="Segoe MDL2 Assets"
-                    Height="45"
-                    Width="45"
-                    Click="HamburgerButton_Click"
-                    />
-
-                    </RelativePanel>
-
-                    <MediaElement Name="MyMediaElement" AutoPlay="True" Grid.ColumnSpan="2" Margin="0,0,166,12" Grid.RowSpan="2"/>
+    <StackPanel>
 
 
-                    <CommandBar Name="MediaControlBar" 
+        <Grid>
+
+
+            <Button Name="HamburgerButton"
+                                        Content="&#xE700;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Height="45"
+                                        Width="45"
+                                        Click="HamburgerButton_Click" />
+
+
+
+            <MediaElement Name="MyMediaElement" AutoPlay="True" Grid.ColumnSpan="2" Margin="0,0,166,12" Grid.RowSpan="2"/>
+
+
+            <CommandBar Name="MediaControlBar" 
                                                     VariableSizedWrapGrid.RowSpan="1"
                                                     Grid.Row="1" Background="White" Foreground="Blue" Height="40" UseLayoutRounding="False" d:LayoutRounding="Auto" VerticalAlignment="Center" Margin="50,0,0,0" >
-                        <CommandBar.RenderTransform>
-                            <CompositeTransform Rotation="-0.051"/>
-                        </CommandBar.RenderTransform>
+                <CommandBar.RenderTransform>
+                    <CompositeTransform Rotation="-0.051"/>
+                </CommandBar.RenderTransform>
 
-                        <AppBarButton x:Name="Play" Icon="Play" Label="Play" Click="PlayButton_Click" Foreground="Green" Margin="40,0,0,0"/>
-                        <AppBarButton Icon="Pause" Label="Pause" Click="PauseButton_Click"/>
-                        <AppBarButton Icon="Stop" Label="Stop" Click="StopButton_Click" Foreground="Red"/>
-                        <AppBarSeparator/>
+                <AppBarButton x:Name="Play" Icon="Play" Label="Play" Click="PlayButton_Click" Foreground="Green" Margin="40,0,0,0"/>
+                <AppBarButton Icon="Pause" Label="Pause" Click="PauseButton_Click"/>
+                <AppBarButton Icon="Stop" Label="Stop" Click="StopButton_Click" Foreground="Red"/>
+                <AppBarSeparator/>
                 <AppBarButton Icon="Add" Label="AddTOPlaylist" Click="AddToList_Click" Foreground="BlueViolet" AllowFocusOnInteraction="True">
                     <AppBarButton.Flyout>
                         <Flyout Placement="Bottom">
-                           
+
                             <StackPanel>
                                 <TextBox x:Name="PlayListName"
                                      Header="Enter the playlist name:" 
@@ -69,49 +58,50 @@
                             </StackPanel>
                         </Flyout>
                     </AppBarButton.Flyout>
-                </AppBarButton> 
-                        
+                </AppBarButton>
 
 
-                        <CommandBar.Content>
+
+                <CommandBar.Content>
 
 
-                            <TextBlock Name="NowPlaying" Text="Now Playing..." FontSize="16"  MaxLines="1" Margin ="20,0" TextWrapping="Wrap"/>
+                    <TextBlock Name="NowPlaying" Text="Now Playing..." FontSize="16"  MaxLines="1" Margin ="20,0" TextWrapping="Wrap"/>
 
-                        </CommandBar.Content>
+                </CommandBar.Content>
 
-                    </CommandBar>
-                </Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Visible">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            </CommandBar>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-                <SplitView Grid.Row="1"
-                   Name="MySpiltView"
+            
+            <SplitView Name="MySpiltView"
                    DisplayMode="CompactOverlay"
                    CompactPaneLength="45"
                    OpenPaneLength="200">
-                    <SplitView.Pane>
-                        <ListView Name="MenuItemsListView"
+                <SplitView.Pane>
+                    <ListView Name="MenuItemsListView"
                           IsItemClickEnabled="True"
-                          ItemClick="MenuItemsListView_ItemClick"/>
-
-                    </SplitView.Pane>
+                          ItemClick="MenuItemsListView_ItemClick">
 
 
-                    <SplitView.Content>
-
-                        <Grid Margin="20,0,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+                    </ListView>
+                </SplitView.Pane>
 
 
-                            <TextBlock Name="CategoryTextBlock"
+                <SplitView.Content>
+
+                    <Grid Margin="20,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <TextBlock Name="CategoryTextBlock"
                                Text="All Songs"
                                FontSize="25"
                                Grid.Row="0"
@@ -119,50 +109,83 @@
                                />
 
 
-                            <Grid Margin="40,40,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                        <Grid Margin="40,40,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
 
-                                <ListBox>
-                                    <ListBoxItem IsEnabled="True" >
+                            <ListBox Margin="-50,0,-20,0">
+                                <ListBoxItem 
+                                    IsEnabled="True" >
 
 
-                                        <ListView Name="MusicListView"
+                                    <ListView Name="MusicListView"
                                           SelectionMode="None"
                                           IsItemClickEnabled="True"
                                           ItemClick="MusicListView_ItemClick"
                                           ItemsSource="{x:Bind music}"
                                          >
 
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate x:DataType="data:Music">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate x:DataType="data:Music">
 
-                                                    <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Vertical">
 
-                                                        <TextBlock Text="{x:Bind SongName}"/>
+                                                    <TextBlock Text="{x:Bind SongName}"/>
 
-                                                    </StackPanel>
+                                                </StackPanel>
 
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </ListBoxItem>
-                                </ListBox>
-                            </Grid>
-
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ListBoxItem>
+                            </ListBox>
                         </Grid>
-                    </SplitView.Content>
+
+                    </Grid>
+                </SplitView.Content>
 
 
-                </SplitView>
+            </SplitView>
+            <Grid Grid.Column="2"
+                  >
+                <TextBlock Name="SongDetails"
+                               Text="Song Details"
+                               FontSize="25"
+                               Grid.Row="0"
+                           Margin="50,0,0,-300"
+                               />
+                <StackPanel>
+                    <RelativePanel>
+                        <Image Name="CoverImage"
+                               Height="200"
+                               Width="200"
+                               Margin="250,100,0,0"
+                               Source="/Assets/Icons/MusicIcon.png"/>
 
+                        <TextBox x:Name="Details"
+                                     Header="Other Details:" 
+                                     PlaceholderText="Text" 
+                                     Width="400"
+                                 RelativePanel.AlignBottomWith="CoverImage"
+                                 Margin="150,200,0,-120"
+                                 />
+                        <Button Name="SaveDetails"
+                                Content="Save"
+                                FontFamily="Segoe UI Light"
+                                Height="30"
+                                Width="80"                                                
+                                Click="SaveDetails_Click"
+                                RelativePanel.AlignBottomWith="Details"
+                                Margin="470,130,0,-175"/>
+                        
+                    </RelativePanel>
+                </StackPanel>
 
             </Grid>
-
-        </ScrollViewer>
+        </Grid>
     </StackPanel>
-    
+
 </Page>

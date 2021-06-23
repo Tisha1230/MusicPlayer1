@@ -122,6 +122,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\Music.cs" />
     <Compile Include="Model\MusicManager.cs" />
     <Compile Include="Model\PlayList.cs" />
@@ -133,7 +134,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Icons\AllSongsIcon.png" />
     <Content Include="Assets\Icons\MusicIcon.png" />
+    <Content Include="Assets\Icons\PlayListIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

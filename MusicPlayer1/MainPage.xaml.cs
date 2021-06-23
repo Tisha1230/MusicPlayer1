@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -36,20 +37,22 @@ namespace MusicPlayer1
             MusicManager.GetMusics(music);
         }
 
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MySpiltView.IsPaneOpen = !MySpiltView.IsPaneOpen;
         }
 
         private void MenuItemsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var menuItem = (MenuItem)e.ClickedItem;
+            CategoryTextBlock.Text = menuItem.menuList.ToString();
             
+            
+        }
+
+        private void AllSongsHeader_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void MusicListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -62,6 +65,9 @@ namespace MusicPlayer1
                 MyMediaElement.Source = new Uri(this.BaseUri, userClickedItem.FileName);
                 MyMediaElement.Play();
                 NowPlaying.Text = userClickedItem.SongName;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.UriSource = userClickedItem.ImageFile;
+                CoverImage.Source = bitmapImage;
             }
         }
 
@@ -93,6 +99,11 @@ namespace MusicPlayer1
                 var playList = new PlayList(playListName);
                 playList.Add(CurrentMusic);
             }
+        }
+
+        private void SaveDetails_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
