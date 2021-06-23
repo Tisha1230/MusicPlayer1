@@ -94,5 +94,10 @@ namespace MusicPlayer1
                 playList.Add(CurrentMusic);
             }
         }
+
+        private void SaveDetails_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
