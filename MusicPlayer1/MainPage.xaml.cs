@@ -31,6 +31,7 @@ namespace MusicPlayer1
         private Music CurrentMusic { get; set; }
         private List<MenuItem> MenuItemListView1;
 
+       
         public MainPage() 
         {
             this.InitializeComponent();
@@ -62,14 +63,8 @@ namespace MusicPlayer1
         {
             var menuItem = (MenuItem)e.ClickedItem;
             CategoryTextBlock.Text = menuItem.menuListCategory.ToString();
-            
-            
         }
 
-        private void AllSongsHeader_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void MusicListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -81,10 +76,18 @@ namespace MusicPlayer1
                 MyMediaElement.Source = new Uri(this.BaseUri, userClickedItem.FileName);
                 MyMediaElement.Play();
                 NowPlaying.Text = userClickedItem.SongName;
+
+                /* to set the Image.source property in code requires an instance of BitmapImage*/
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.UriSource = userClickedItem.ImageFile;
                 CoverImage.Source = bitmapImage;
+
+                //calling ReadDetails to set text, if nothting exixts, it will clear text
+                Details.Text =  MusicManager.ReadDetails(CurrentMusic.SongName);
+
             }
+
+
         }
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
@@ -119,7 +122,8 @@ namespace MusicPlayer1
 
         private void SaveDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            string DetailsText = Details.Text;
+            MusicManager.SaveDetails(DetailsText, CurrentMusic.SongName);
         }
     }
 }
