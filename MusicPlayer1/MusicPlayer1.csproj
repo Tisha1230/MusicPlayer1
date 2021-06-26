@@ -126,6 +126,7 @@
     <Compile Include="Model\Music.cs" />
     <Compile Include="Model\MusicManager.cs" />
     <Compile Include="Model\PlayList.cs" />
+    <Compile Include="Model\PlayListManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
