@@ -29,7 +29,7 @@ namespace MusicPlayer1
         public string ImageFile { get; set; }
         public string SongName { get; set; }
         private Music CurrentMusic { get; set; }
-        private List<MenuItem> MenuItemListView1;
+        private ObservableCollection<MenuItem> MenuItemList1; //observablecollection is used instead of List to make it dynamic
 
        
         public MainPage() 
@@ -38,20 +38,27 @@ namespace MusicPlayer1
             music = new ObservableCollection<Music>();
             MusicManager.GetMusics(music);
 
-            MenuItemListView1 = new List<MenuItem>()
+            var playLists= PlayListManager.GetAllPlayLists(); //gets all playLists and stores it in variable playList
+
+            MenuItemList1 = new ObservableCollection<MenuItem>()
             {
                 new MenuItem
                 {
-                    menuListCategory = MenuList.MyLibrary,
+                    menuListCategory = "My Library",
                     IconFile= "Assets/Icons/AllSongsIcon.png"
-                },
-
-                new MenuItem
-                {
-                    menuListCategory = MenuList.Playlists,
-                    IconFile= "Assets/Icons/PlayListIcon.png"
-                },
+                }
             };
+
+            foreach (var playList in playLists)
+            {
+                var menuItem = new MenuItem
+                {
+                    menuListCategory = playList.Name,
+                    IconFile = "Assets/Icons/PlayListIcon.png"
+                };
+
+                MenuItemList1.Add(menuItem);
+            }
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -62,7 +69,22 @@ namespace MusicPlayer1
         private void MenuItemsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var menuItem = (MenuItem)e.ClickedItem;
-            CategoryTextBlock.Text = menuItem.menuListCategory.ToString();
+            CategoryTextBlock.Text = menuItem.menuListCategory;
+
+            if(menuItem.menuListCategory=="My Library")
+            {
+                MusicManager.GetMusics(music);
+            }
+            else
+            {
+                var playList = new PlayList(menuItem.menuListCategory);
+                music.Clear();
+                foreach(var song in playList.songs)
+                {
+                    music.Add(song); //since musiclistview binds to music, adding songs in music, to display songs in playlist
+                }
+            }
+            
         }
 
 
@@ -117,6 +139,26 @@ namespace MusicPlayer1
                 string playListName = PlayListName.Text;
                 var playList = new PlayList(playListName);
                 playList.Add(CurrentMusic);
+                var menuItem = new MenuItem
+                {
+                    menuListCategory = playListName,
+                    IconFile = "Assets/Icons/PlayListIcon.png"
+                };
+
+                bool isFound = false;
+                foreach (var m in MenuItemList1)
+                {
+                    if (playListName == m.menuListCategory)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(isFound == false)
+                {
+                    MenuItemList1.Add(menuItem);
+                }
             }
         }
 

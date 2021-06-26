@@ -84,7 +84,7 @@
                     <ListView Name="MenuItemsListView"
                           IsItemClickEnabled="True"
                           ItemClick="MenuItemsListView_ItemClick"
-                              ItemsSource="{x:Bind MenuItemListView1}"
+                              ItemsSource="{x:Bind MenuItemList1}"
                              >
                         <ListView.ItemTemplate >
                             <DataTemplate x:DataType="data:MenuItem">

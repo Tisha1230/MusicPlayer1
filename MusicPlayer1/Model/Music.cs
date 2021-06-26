@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer1.Model
 {
-    public enum MenuList
-    {
-        MyLibrary,
-        Playlists
-    }
    public class Music
     {
         public string FileName { get; set; }
